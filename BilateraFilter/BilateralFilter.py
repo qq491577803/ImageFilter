@@ -1,6 +1,7 @@
 #Implemention for cv2 bilateralFiter
 import cv2
 import numpy as np
+import time
 class BilateralFilter():
     def __init__(self,Image,ImageBit,sigmaColor,sigmaSpace,radius):
         self.Image = Image
@@ -69,13 +70,13 @@ class BilateralFilter():
                             wtSumB, wtSumG,wtSumR= wtSumB + wtB,wtSumG + wtG,wtSumR + wtR
                     imageValB,imageValG,imageValR = imageValB / wtSumB,imageValG / wtSumG,imageValR / wtSumR
                     dstImage[row][col][:] = self.clipBit(imageValB),self.clipBit(imageValG),self.clipBit(imageValR)
-
-                print(row,col)
         return dstImage
 if __name__ == '__main__':
     path = "../Images/face.jpg"
     imageGray = cv2.imread(path,cv2.IMREAD_UNCHANGED)
+    startT = time.time()
     imageFilter = BilateralFilter(imageGray,ImageBit = 8,sigmaColor = 25,sigmaSpace = 9,radius = 3).filter()
+    print("Total cost time :",time.time() - startT)
     cv2.imshow("srcImage",imageGray)
     cv2.imshow("dstImage",imageFilter)
     cv2.waitKey(0)
