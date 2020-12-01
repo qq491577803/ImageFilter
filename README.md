@@ -5,3 +5,6 @@
 
 
 2.Base on Bilateral Filter to enhance iamge detail.
+
+
+3.this is an implementation of Kevin Chen's bilateral grid filter on the IOS
